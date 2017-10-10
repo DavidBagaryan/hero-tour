@@ -1,0 +1,19 @@
+<div>
+  <label for="new-hero">имя нового героя</label>
+  <input id="new-hero" #heroName/>
+  <button (click)="add(heroName.value); heroName.value=''">добавить</button>
+</div>
+<h2>my heroes</h2>
+<ul class="heroes">
+  <li [class.selected]="hero === selectedHero" (click)="onSelect(hero)" *ngFor="let hero of heroes">
+    <span class="badge">{{hero.id}}</span>
+    <b>{{hero.name}}</b>
+    <i *ngIf="hero.power">&clubs; силу имеет</i>
+  </li>
+</ul>
+<div *ngIf="selectedHero">
+  <h2>{{selectedHero.name.toUpperCase()}}
+    <span *ngIf="selectedHero.power">{{': '+selectedHero.power}}</span>
+  </h2>
+  <button class="btn btn-outline-secondary" (click)="goToDetail()">посмотреть героя</button>
+</div>

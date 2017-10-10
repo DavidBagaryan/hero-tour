@@ -1,0 +1,11 @@
+<h3>наикрутейшие</h3>
+<div class="grid grid-pad">
+  <div *ngFor="let hero of heroes" [routerLink]="['/detail', hero.id]" class="col-1-4">
+    <div class="module hero">
+      <h4>
+        {{hero.name}}
+        <span *ngIf="hero.power">&#9827;</span>
+      </h4>
+    </div>
+  </div>
+</div>

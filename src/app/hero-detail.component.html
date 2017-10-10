@@ -1,0 +1,27 @@
+<div *ngIf="hero">
+  <h3>а теперь про {{hero.name}} детально</h3>
+  <div>
+    <label>имя</label> {{hero.name}}
+  </div>
+  <div class="form-inline">
+    <label class="form-control-label font-weight-bold" for="power">сила</label>
+    <div id="power">
+      <div *ngIf="!editMode; else updateMode">
+        <div *ngIf="hero.power != undefined; else addHero">
+          <span>{{hero.power}}</span>
+          <button class="btn btn-outline-success" (click)="power()">изменить</button>
+        </div>
+        <ng-template #addHero>
+          <button class="btn btn-outline-info" (click)="power()">добавить</button>
+        </ng-template>
+      </div>
+      <ng-template class="form-inline" #updateMode>
+        <input [(ngModel)]="hero.power" class="form-control" placeholder="ну и..."/>
+        <button class="btn btn-outline-primary" (click)="update('save')">сохранить</button>
+        <button class="btn btn-outline-danger" (click)="update('cancel')">отменить</button>
+      </ng-template>
+    </div>
+  </div>
+  <br/>
+  <button class="btn btn-outline-secondary" (click)="goBack()">давай назад</button>
+</div>
