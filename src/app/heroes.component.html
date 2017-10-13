@@ -1,19 +1,21 @@
-<div>
-  <label for="new-hero">имя нового героя</label>
-  <input id="new-hero" #heroName/>
-  <button (click)="add(heroName.value); heroName.value=''">добавить</button>
+<div class="form-inline">
+  <label class="form-control-label font-weight-bold" for="new-hero">имя нового героя&nbsp;</label>
+  <input id="new-hero" class="form-control" #heroName/>
+  <button class="btn btn-outline-success" (click)="add(heroName.value); heroName.value=''">добавить</button>
 </div>
-<h2>my heroes</h2>
+<h2>геройчиги</h2>
 <ul class="heroes">
   <li [class.selected]="hero === selectedHero" (click)="onSelect(hero)" *ngFor="let hero of heroes">
     <span class="badge">{{hero.id}}</span>
     <b>{{hero.name}}</b>
     <i *ngIf="hero.power">&clubs; силу имеет</i>
+    <button class="btn btn-sm btn-outline-secondary delete" (click)="remove(hero); $event.stopPropagation()">x</button>
   </li>
 </ul>
 <div *ngIf="selectedHero">
   <h2>{{selectedHero.name.toUpperCase()}}
-    <span *ngIf="selectedHero.power">{{': '+selectedHero.power}}</span>
+    <span *ngIf="selectedHero.power; else noPower">{{': '+selectedHero.power}}</span>
+    <ng-template #noPower>пока силы не имеет</ng-template>
   </h2>
   <button class="btn btn-outline-secondary" (click)="goToDetail()">посмотреть героя</button>
 </div>

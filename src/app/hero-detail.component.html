@@ -1,11 +1,14 @@
 <div *ngIf="hero">
-  <h3>а теперь про {{hero.name}} детально</h3>
+  <h3>а теперь детально про героя, имя которому
+    <b>{{hero.name}}</b>
+  </h3>
   <div>
-    <label>имя</label> {{hero.name}}
+    <label class="font-weight-bold" for="name">имя</label>
+    <span id="name">{{hero.name}}</span>
   </div>
   <div class="form-inline">
     <label class="form-control-label font-weight-bold" for="power">сила</label>
-    <div id="power">
+    <div id="power" class="form-inline">&nbsp;
       <div *ngIf="!editMode; else updateMode">
         <div *ngIf="hero.power != undefined; else addHero">
           <span>{{hero.power}}</span>

@@ -32,10 +32,14 @@ export class HeroDetailComponent implements OnInit {
   power() { this.editMode = true }
   goBack(): void { this.location.back() }
   update(mode: string): void {
-    if (mode === 'save') { this.heroService.update(this.hero).then(() => this.editMode = false)}
-    if (mode === 'cancel') {
-      this.hero.power = '';
+    if (mode === 'save') { this.heroService.update(this.hero).then(hero => {
       this.editMode = false;
+      this.hero.power = this.hero.power === '' ? undefined : hero.power;
+    })}
+    if (mode === 'cancel') {
+      this.editMode = false;
+      this.heroService.getHero(this.hero.id)
+        .then(hero => { this.hero.power = hero.power === '' ? undefined : hero.power });
     }
   }
 }
